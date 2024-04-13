@@ -18,11 +18,26 @@ To tackle the different dimensions of political ad transparency we have develope
 
 This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP persons file, a comprehensive file with names of candidates and others in the political process. Data are restricted to general election candidates and other non-candidate persons of interest (sitting senators, cabinet members, international leaders, etc.).
 
+The repo provides reusable code for the following 3 tasks:
+
+- Constructing a knowledge base of political entities (figures) of interest:
+  This knowledge base has 4 colums that includes entities' "id", "name", "description" and "aliases".(Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke) Here is an example of one row in the knowledge base:
+
+```csv
+| id | name | descr | aliases |
+| WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
+```
+
+- Training a entity linking model using the knowledge base
+- Applying the trained model to automatically identify and link entity mentions in new political ad text
+
 First, the knowledge base of persons of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file. The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file, a comprehensive file with names of candidates.
 
 Once the knowledge base of persons of interest is constructed, the entity linker can be initialized with spaCy in `facebook/train/02_train_entity_linking.py`.
 
 Finally, the entity linker can be applied to the inference data. We have included some additional modifications to address disambiguating multiple "Harrises" and similar edge cases.
+
+While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which political figures are mentioned in ads. This entity linker is especially helpful when you have a large amount of ad text data and you don't want to waste time counting how many times a political figure is mentioned within these ads. You can follow the set up instructions below to apply the entity linker to your own data.
 
 ## 2. Data
 
