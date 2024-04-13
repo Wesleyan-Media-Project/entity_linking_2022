@@ -10,15 +10,15 @@ To tackle the different dimensions of political ad transparency we have develope
 
 ## Table of Contents
 
-[1. Introduction](#1-overview)
-[2. Data](#2-data)
+[1. Introduction](#1-overview)  
+[2. Data](#2-data)  
 [3. Setup](#3-setup)
 
 ## 1. Overview
 
 This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP persons file, a comprehensive file with names of candidates and others in the political process. Data are restricted to general election candidates and other non-candidate persons of interest (sitting senators, cabinet members, international leaders, etc.).
 
-The knowledge base of persons of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file. The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file, a comprehensive file with names of candidates.
+First, the knowledge base of persons of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file. The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file, a comprehensive file with names of candidates.
 
 Once the knowledge base of persons of interest is constructed, the entity linker can be initialized with spaCy in `facebook/train/02_train_entity_linking.py`.
 
@@ -30,7 +30,7 @@ When you run the entity linker, the entity linking results are stored in the `da
 
 ## 3. Setup
 
-The scripts are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives, usually they are the same scripts on different data, or with minor variations. The outputs of each script are saved, so it is possible to, for example, only run the inference script, since the model files are already present.
+The scripts are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives, usually they are the same scripts on different data or with minor variations. The outputs of each script are saved, so it is possible to, for example, only run the inference script, since the model files are already present.
 
 There are separate folders for running the entity linker on Facebook and Google data. For Facebook, the scripts need to be run in the order of (1) knowledge base, (2) training, and (3) inference.
 
