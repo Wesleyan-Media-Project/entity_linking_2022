@@ -10,7 +10,7 @@ To tackle the different dimensions of political ad transparency we have develope
 
 ## Table of Contents
 
-[1. Introduction](#1-overview)  
+[1. Overview](#1-overview)  
 [2. Data](#2-data)  
 [3. Setup](#3-setup)
 
