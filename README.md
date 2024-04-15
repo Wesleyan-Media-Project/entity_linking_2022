@@ -8,13 +8,19 @@ To tackle the different dimensions of political ad transparency we have develope
 
 ![A picture of the repo pipeline with this repo highlighted](Creative_Pipelines.png)
 
+
+
+
 ## Table of Contents
+[1. Video Tutorial](#1-video-tutorial)  
+[2. Overview](#2-overview)  
+[3. Data](#3-data)  
+[4. Setup](#4-setup)
 
-[1. Overview](#1-overview)  
-[2. Data](#2-data)  
-[3. Setup](#3-setup)
+## 1. Video Tutorial 
+https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/f7a8a98d-e779-4b77-827d-2d84f02530be
 
-## 1. Overview
+## 2. Overview
 
 This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP persons file: [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv) and [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv)--- two comprehensive files with names of candidates and others in the political process. Data are restricted to general election candidates and other non-candidate persons of interest (sitting senators, cabinet members, international leaders, etc.).
 
@@ -35,7 +41,7 @@ The repo provides reusable code for the following 3 tasks:
 
 While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which political figures are mentioned in ads. This entity linker is especially helpful when you have a large amount of ad text data and you don't want to waste time counting how many times a political figure is mentioned within these ads. You can follow the set up instructions below to apply the entity linker to your own data.
 
-## 2. Data
+## 3. Data
 
 When you run the entity linker, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format. Here is an example of the entity linking results `entity_linking_results_fb22.csv.gz`:
 
@@ -52,7 +58,7 @@ In this example,
 - The `ad_id` column contains the unique identifier for the ad.
 - The `field` column contains the field in the ad where the entity was detected. This could be the `page_name`, `ad_creative_body`, `google_asr_text`(texts that we extracts from video ads through Google Automatic Speech Recognition) and etc.
 
-## 3. Setup
+## 4. Setup
 
 The scripts are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives, usually they are the same scripts on different data or with minor variations. The outputs of each script are saved, so it is possible to, for example, only run the inference script, since the model files are already present.
 
