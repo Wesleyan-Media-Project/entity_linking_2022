@@ -8,16 +8,16 @@ To tackle the different dimensions of political ad transparency we have develope
 
 ![A picture of the repo pipeline with this repo highlighted](Creative_Pipelines.png)
 
-
-
-
 ## Table of Contents
+
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
 [3. Data](#3-data)  
 [4. Setup](#4-setup)
+[5. Thank You!](#5-thank-you)
 
-## 1. Video Tutorial 
+## 1. Video Tutorial
+
 https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/f7a8a98d-e779-4b77-827d-2d84f02530be
 
 ## 2. Overview
@@ -60,17 +60,50 @@ In this example,
 
 ## 4. Setup
 
-The scripts are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives, usually they are the same scripts on different data or with minor variations. The outputs of each script are saved, so it is possible to, for example, only run the inference script, since the model files are already present.
+First, clone this repository to your local directory. The scripts in this repo are in Python and R. To run the scripts in Python, you may need to install a python virtual environment. For more information about setting up a Python virtual environment, you can refer to this [document](https://realpython.com/python-virtual-environments-a-primer/). The rest script in this repo are based on R. To install and set up R, you can follow the CRAN webiste [here](https://cran.r-project.org/).
+
+The scripts are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives, usually they are the same scripts on different data or with minor variations. For example, `02_train_entity_linking.py` and `02_untrained_model.py` are both scripts for training entity linking model. But they different slightly on training datasets. The outputs of each script are saved, so it is possible to, for example, only run the inference script, since the model files are already present.
 
 There are separate folders for running the entity linker on Facebook and Google data. For Facebook and Google, the scripts need to be run in the order of (1) knowledge base, (2) training, and (3) inference.
 
-If you want to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base) from this repo, you will also need the scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repos.
+The knowledge base construction is optional for the script in the repo to work since the knowledge base construction result `entity_kb.csv`is stored in `/data` folder. If you want to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base) from this repo, you will also need the scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repos.
 
-Some scripts in this repo require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo (which contains datasets that are not created in any of the other CREATIVE repos and intended to be used in more than one repo) and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo.
+The entity linking model training scripts in this repo require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo (which contains datasets that are not created in any of the other CREATIVE repos and intended to be used in more than one repo) and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo.
 
 Any depending repos are assumed to be cloned into the same top-level folder as this repo. For detailed setup instructions for additional repos, please refer to the readmes of the respective repos.
 
-Some scripts operate in a Python environment and need the following packages: `spacy` version 3.2.4 and `en_core_web_lg` from `spacy`. The scripts in this repo were tested on Python 3.10. We recommend creating a Python virtual environment by using Anaconda to run the scripts in this repo.
+Some scripts operate in a Python 3 environment and need the following packages: `spacy` version 3.2.4 and `en_core_web_lg` from `spacy`. The scripts in this repo were tested on Python 3.10. For better package version control, we recommend creating a Python virtual environment by using Anaconda to run the scripts in this repo. To install the
+`en_core_web_lg` package, you can run the following command in the terminal; The command below works for both macOS/Linux and Windows:
 
-`en_core_web_lg` requires manual installation, which can be done by running the following command in the terminal:
-`python -m spacy download en_core_web_lg`
+```bash
+pip install spacy==3.2.4
+python -m spacy download en_core_web_lg
+```
+
+## 5. Thank You!
+
+<p align="center"><strong>We would like to thank our financial supporters!</strong></p><br>
+
+<p align="center">This material is based upon work supported by the National Science Foundation under Grant Numbers 2235006, 2235007, and 2235008..</p>
+
+<p align="center">
+  <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2235006">
+    <img class="img-fluid" src="nsf.png" height="100px" alt="National Science Foundation Logo">
+  </a>
+</p>
+
+<p align="center">The Cross-Platform Election Advertising Transparency Initiative (CREATIVE) is a joint infrastructure project of the Wesleyan Media Project and Privacy Tech Lab at Wesleyan University in Connecticut.
+
+<div align="center" style="display: flex; justify-content: center; align-items: center;">
+  <a href="https://privacytechlab.org/" style="margin-right: 20px;">
+    <img src="./plt_logo.png" width="200px" height="200px" alt="privacy-tech-lab logo">
+  </a>
+  <a href="https://mediaproject.wesleyan.edu/">
+    <img src="wmp-logo.png" width="218px" height="100px" alt="Wesleyan Media Project logo">
+  </a>
+</div>
+<p align="center">
+  <a href="https://www.creativewmp.com/">
+    <img class="img-fluid" src="CREATIVE_logo.png" height="90px" alt="CREATIVE Logo">
+  </a>
+</p>
