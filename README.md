@@ -16,38 +16,47 @@ To tackle the different dimensions of political ad transparency we have develope
 
 ## 1. Overview
 
-This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP persons file, a comprehensive file with names of candidates and others in the political process. Data are restricted to general election candidates and other non-candidate persons of interest (sitting senators, cabinet members, international leaders, etc.).
+This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP persons file: [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv) and [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv)--- two comprehensive files with names of candidates and others in the political process. Data are restricted to general election candidates and other non-candidate persons of interest (sitting senators, cabinet members, international leaders, etc.).
 
 The repo provides reusable code for the following 3 tasks:
 
-- Constructing a knowledge base of political entities (figures) of interest:
-  This knowledge base has 4 colums that includes entities' "id", "name", "description" and "aliases".(Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke) Here is an example of one row in the knowledge base:
+- First, constructing a knowledge base of political entities (figures) of interest:
 
-```csv
-| id | name | descr | aliases |
-| WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
-```
+  - The knowledge base of persons of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
+  - This knowledge base has 4 colums that includes entities' "id", "name", "description" and "aliases".(Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke) Here is an example of one row in the knowledge base:
 
-- Training a entity linking model using the knowledge base
-- Applying the trained model to automatically identify and link entity mentions in new political ad text
+  ```csv
+  | id | name | descr | aliases |
+  | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
+  ```
 
-First, the knowledge base of persons of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file. The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file, a comprehensive file with names of candidates.
-
-Once the knowledge base of persons of interest is constructed, the entity linker can be initialized with spaCy in `facebook/train/02_train_entity_linking.py`.
-
-Finally, the entity linker can be applied to the inference data. We have included some additional modifications to address disambiguating multiple "Harrises" and similar edge cases.
+- Second, training a entity linking model using the knowledge base. Once the knowledge base of persons of interest is constructed, the entity linker can be initialized with spaCy in `facebook/train/02_train_entity_linking.py`.
+- Finally, applying the trained model to automatically identify and link entity mentions in new political ad text. We have included some additional modifications to address disambiguating multiple "Harrises" and similar edge cases.
 
 While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which political figures are mentioned in ads. This entity linker is especially helpful when you have a large amount of ad text data and you don't want to waste time counting how many times a political figure is mentioned within these ads. You can follow the set up instructions below to apply the entity linker to your own data.
 
 ## 2. Data
 
-When you run the entity linker, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format.
+When you run the entity linker, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format. Here is an example of the entity linking results `entity_linking_results_fb22.csv.gz`:
+
+```csv
+|text|text_detected_entities|text_start| text_end| ad_id |field
+Senator John Smith is fighting hard for Californians. | WMPID1234 | [8] | [18] | x_1234 | ad_creative_body
+```
+
+In this example,
+
+- The `text` column contains the raw ad text where entities were detected.
+- The `text_detected_entities` column contains the detected entities in the ad text. They are listed by their WMPID.
+- `text_start` and `text_end indicate` the character offsets where the entity mention appears in the text.
+- The `ad_id` column contains the unique identifier for the ad.
+- The `field` column contains the field in the ad where the entity was detected. This could be the `page_name`, `ad_creative_body`, `google_asr_text`(texts that we extracts from video ads through Google Automatic Speech Recognition) and etc.
 
 ## 3. Setup
 
 The scripts are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives, usually they are the same scripts on different data or with minor variations. The outputs of each script are saved, so it is possible to, for example, only run the inference script, since the model files are already present.
 
-There are separate folders for running the entity linker on Facebook and Google data. For Facebook, the scripts need to be run in the order of (1) knowledge base, (2) training, and (3) inference.
+There are separate folders for running the entity linker on Facebook and Google data. For Facebook and Google, the scripts need to be run in the order of (1) knowledge base, (2) training, and (3) inference.
 
 If you want to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base) from this repo, you will also need the scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repos.
 
