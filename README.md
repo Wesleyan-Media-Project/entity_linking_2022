@@ -31,9 +31,9 @@ The repo provides reusable code for the following three tasks:
    - The knowledge base of people of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
    - This knowledge base has four columns that include entities' "id", "name", "description" and "aliases". Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
 
-   | id        | name      | descr                                                                    | aliases                                                             |
-   | --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-   | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
+     | id        | name      | descr                                                                    | aliases                                                             |
+     | --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+     | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
 
 2. Second, training an entity linking model using the knowledge base. Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in `facebook/train/02_train_entity_linking.py`.
 
