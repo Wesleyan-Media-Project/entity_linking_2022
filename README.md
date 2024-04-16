@@ -26,18 +26,25 @@ This repo contains an entity linker for 2022 election data. The entity linker is
 
 The repo provides reusable code for the following three tasks:
 
-1. First, constructing a knowledge base of political entities (people) of interest:
+### 1. Constructing Knowledge Base of Political Entities
 
-   - The knowledge base of people of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
-   - This knowledge base has four columns that include entities' "id", "name", "description" and "aliases". Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
+The first task is to construct a knowledge base of political entities (people) of interest.
 
-     | id        | name      | descr                                                                    | aliases                                                             |
-     | --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-     | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
+The knowledge base of people of interest is constructed in `facebook/train/01_construct_kb.R`. The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
 
-2. Second, training an entity linking model using the knowledge base. Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in `facebook/train/02_train_entity_linking.py`.
+The knowledge base has four columns that include entities' "id", "name", "description" and "aliases". Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
 
-3. Finally, applying the trained model to automatically identify and link entities mentioned in new political ad text. We have included some additional modifications to address disambiguating people, for example, multiple "Harrises."
+| id        | name      | descr                                                                    | aliases                                                             |
+| --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
+
+### 2. Train Entity Linking Model
+
+The second task is to train an entity linking model using the knowledge base. Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in `facebook/train/02_train_entity_linking.py`.
+
+### 3. Apply the Trained Model
+
+The third task is to apply the trained model to automatically identify and link entities mentioned in new political ad text. We have included some additional modifications to address disambiguating people, for example, multiple "Harrises."
 
 While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which people of interest are mentioned in ads. This entity linker is especially helpful if you have a large amount of ad text data and you do not want to waste time counting how many times a political figure is mentioned within these ads. You can follow the setup instructions below to apply the entity linker to your own data.
 
@@ -59,7 +66,7 @@ In this example,
 
 ## 4. Setup
 
-The following setup instructions are for macOS/Linux. For Windows the setup is very similar.
+The following setup instructions are for macOS/Linux. For Windows the steps are the same but the commands may be different.
 
 1. First, clone this repo to your local directory:
 
