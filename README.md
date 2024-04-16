@@ -26,7 +26,7 @@ This repo contains an entity linker for 2022 election data. The entity linker is
 
 The repo provides reusable code for the following three tasks:
 
-### 1. Constructing Knowledge Base of Political Entities
+### 1. Construct Knowledge Base of Political Entities
 
 The first task is to construct a knowledge base of political entities (people) of interest.
 
