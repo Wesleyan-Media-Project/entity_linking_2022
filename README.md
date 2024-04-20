@@ -59,7 +59,7 @@ When you run the entity linker, the entity linking results are stored in the `da
 In this example,
 
 - The `text` column contains the raw ad text where entities were detected.
-- The `text_detected_entities` column contains the detected entities in the ad text. They are listed by their WMPID.
+- The `text_detected_entities` column contains the detected entities in the ad text. They are listed by their WMPID. WMPID is the unique id that Wesleyan Media Project assigns to each candidate in the knowledge base(e.g. Adam Gray: WMPID1770). The WMPID is used to link the detected entities to the knowledge base.
 - `text_start` and `text_end` indicate the character offsets where the entity mention appears in the text.
 - The `ad_id` column contains the unique identifier for the ad.
 - The `field` column contains the field in the ad where the entity was detected. This could be, for example, the `page_name`, `ad_creative_body`, or `google_asr_text`(texts that we extract from video ads through Google Automatic Speech Recognition).
@@ -94,7 +94,32 @@ The following setup instructions are for macOS/Linux. For Windows the steps are 
    deactivate
    ```
 
-5. Run the scripts in this repo according to their numbering.
+5. Run the scripts in this repo according to their numbering. For example, if you want to run the inference pipeline folder, you can run the script follow the order of `facebook/inference/01_combine_text_asr_ocr.R`, `facebook/inference/02_entity_linking_inference.py`, `facebook/inference/03_combine_results.R`. Or use the following command in your terminal:
+
+   For Mac/Linux/Windows Command Prompt (cmd.exe):
+
+   ```bash
+   Rscript facebook/inference/01_combine_text_asr_ocr.R
+   &&
+   python facebook/inference/02_entity_linking_inference.py
+   &&
+   Rscript facebook/inference/03_combine_results.R
+   ```
+
+   For Windows PowerShell:
+
+   ```bash
+   Rscript facebook/inference/01_combine_text_asr_ocr.R;
+   if ($?) { python facebook/inference/02_entity_linking_inference.py };
+   if ($?) { Rscript facebook/inference/03_combine_results.R }
+   ```
+
+   After successfully running the above scripts in the inference folder, you should be able to see the following entity linking results in the `data` folder:
+
+   - `entity_linking_results_fb22.csv.gz`
+   - `entity_linking_results_fb22_notext.csv.gz`
+   - `detected_entities_fb22.csv.gz`
+   - `detected_entities_fb22_for_ad_tone.csv.gz`
 
 **Note**: The scripts in this repo are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives, usually they are the same scripts on different data or with minor variations. For example, `02_train_entity_linking.py` and `02_untrained_model.py` are both scripts for training an entity linking model. But they differ slightly as to their training datasets. The outputs of each script are saved. Thus, it is possible to only run the inference script, since the model files are already present.
 
