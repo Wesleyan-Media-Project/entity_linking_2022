@@ -72,7 +72,9 @@ In this example,
 
 The following setup instructions are for the default terminal on macOS/Linux. For Windows the steps are the same but the commands may be slightly different.
 
-1. First, clone this repo to your local directory:
+0. **Optional**: Constructing the knowledge base and training the entity linking models are optional. We provide pre-trained models in this repo, and you can start with the inference per the following steps. If you want to construct a knowledge base and train models yourself, note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For detailed setup instructions, please refer to the readmes of the respective repos. The training may take multiple hours or even days, depending on your hardware.
+
+1. To start setting up inferences based on our pre-trained models, first clone this repo to your local directory:
 
    ```bash
    git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022.git
@@ -130,8 +132,6 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    - `detected_entities_fb22_for_ad_tone.csv.gz`
 
    **Note**: The scripts in this repo are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives. Usually, they are the same scripts on different data or with minor variations. For example, [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py) and [facebook/train/02_untrained_model.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_untrained_model.py) are both scripts for training an entity linking model, but they differ slightly as to their training datasets.
-
-7. Constructing the knowledge base and training the entity linking models are optional. If you want to do so, note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For detailed setup instructions, please refer to the readmes of the respective repos.
 
 ## 5. Thank You
 
