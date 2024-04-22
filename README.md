@@ -12,8 +12,8 @@ To analyze the different dimensions of political ad transparency we have develop
 
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
-[3. Data](#3-data)  
-[4. Setup](#4-setup)  
+[3. Setup](#3-setup)  
+[4. Results Storage](#4-results-storage)  
 [5. Thank You!](#5-thank-you)
 
 ## 1. Video Tutorial
@@ -26,7 +26,7 @@ This repo contains an entity linker for 2022 election data. The entity linker is
 
 While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which people of interest are mentioned in ads. This entity linker is especially helpful if you have a large amount of ad text data and you do not want to waste time counting how many times a political figure is mentioned within these ads. You can follow the setup instructions below to apply the entity linker to your own data.
 
-There are separate folders for running the entity linker on Facebook and Google data. For both Facebook and Google, the scripts need to be run in the order of (1) Knowledge Base, (2) Training, and (3) Inference. The repo provides reusable code for these three tasks:
+There are separate folders for running the entity linker on Facebook and Google data. For both Facebook and Google, the scripts need to be run in the order of the three tasks: (1) constructing a knowledge base of political entities, (2) training the entity linking model, and (3) making inferences with the trained model. The repo provides reusable code for these three tasks. In more detail:
 
 1. **Construct Knowledge Base of Political Entities**
 
@@ -44,31 +44,19 @@ There are separate folders for running the entity linker on Facebook and Google 
 
 2. **Train Entity Linking Model**
 
-   The second task is to train an entity linking model using the knowledge base. Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/train/02_train_entity_linking.py).
+   The second task is to train an entity linking model using the knowledge base.
+
+   Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/train/02_train_entity_linking.py).
 
    **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our existing models (INCLUDE LINK TO EXISTING MODELS). If you want to train your own models, (INCLUDE SOME DESCRIPTION IF ANY.)
 
 3. **Make Inferences with Trained Model**
 
-   The third task is to make inferences with the trained model to automatically identify and link entities mentioned in new political ad text. To do so, you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/issue-2/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/issue-2/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
+   The third task is to make inferences with the trained model to automatically identify and link entities mentioned in new political ad text.
 
-## 3. Data
+   To perform this task you can use the scripts in the inferences folders, [facebook/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/issue-2/facebook/inference) and [google/inference](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/issue-2/google/inference). The folders incluced variations of scripts to disambiguate people, for example, multiple "Harrises" (e.g., Kamala Harris and Andy Harris).
 
-When you run the inference scripts, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format. Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/data/entity_linking_results_fb22.csv.gz):
-
-| text                                                  | text_detected_entities | text_start | text_end | ad_id  | field            |
-| ----------------------------------------------------- | ---------------------- | ---------- | -------- | ------ | ---------------- |
-| Senator John Smith is fighting hard for Californians. | WMPID1234              | [8]        | [18]     | x_1234 | ad_creative_body |
-
-In this example,
-
-- The `text` field contains the raw ad text where entities were detected.
-- The `text_detected_entities` field contains the detected entities in the ad text. They are listed by their WMPID. WMPID is the unique id that Wesleyan Media Project assigns to each candidate in the knowledge base(e.g. Adam Gray: WMPID1770). The WMPID is used to link the detected entities to the knowledge base.
-- The `text_start` and `text_end` fields indicate the character offsets where the entity mention appears in the text.
-- The `ad_id` field contains the unique identifier for the ad.
-- The `field` field contains the field in the ad where the entity was detected. This could be, for example, the `page_name`, `ad_creative_body`, or `google_asr_text` (texts that we extract from video ads through Google Automatic Speech Recognition).
-
-## 4. Setup
+## 3. Setup
 
 The following setup instructions are for the default terminal on macOS/Linux. For Windows the steps are the same but the commands may be slightly different.
 
@@ -132,6 +120,22 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    - `detected_entities_fb22_for_ad_tone.csv.gz`
 
    **Note**: The scripts in this repo are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives. Usually, they are the same scripts on different data or with minor variations. For example, [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py) and [facebook/train/02_untrained_model.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_untrained_model.py) are both scripts for training an entity linking model, but they differ slightly as to their training datasets.
+
+## 4. Results Storage
+
+When you run the inference scripts, the entity linking results are stored in the `data` folder. The data will be in `csv.gz` and `csv` format. Here is an example of the entity linking results [facebook/data/entity_linking_results_fb22.csv.gz](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/data/entity_linking_results_fb22.csv.gz):
+
+| text                                                  | text_detected_entities | text_start | text_end | ad_id  | field            |
+| ----------------------------------------------------- | ---------------------- | ---------- | -------- | ------ | ---------------- |
+| Senator John Smith is fighting hard for Californians. | WMPID1234              | [8]        | [18]     | x_1234 | ad_creative_body |
+
+In this example,
+
+- The `text` field contains the raw ad text where entities were detected.
+- The `text_detected_entities` field contains the detected entities in the ad text. They are listed by their WMPID. WMPID is the unique id that Wesleyan Media Project assigns to each candidate in the knowledge base(e.g. Adam Gray: WMPID1770). The WMPID is used to link the detected entities to the knowledge base.
+- The `text_start` and `text_end` fields indicate the character offsets where the entity mention appears in the text.
+- The `ad_id` field contains the unique identifier for the ad.
+- The `field` field contains the field in the ad where the entity was detected. This could be, for example, the `page_name`, `ad_creative_body`, or `google_asr_text` (texts that we extract from video ads through Google Automatic Speech Recognition).
 
 ## 5. Thank You
 
