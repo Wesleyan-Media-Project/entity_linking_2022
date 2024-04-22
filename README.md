@@ -72,7 +72,9 @@ In this example,
 
 The following setup instructions are for the default terminal on macOS/Linux. For Windows the steps are the same but the commands may be slightly different.
 
-Constructing the knowledge base and training the entity linking models are optional. We provide pre-trained models in this repo, and you can start with the inference per the following steps. If you want to construct a knowledge base and train models yourself, note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For detailed setup instructions, please refer to the readmes of the respective repos. The training may take multiple hours or even days, depending on your hardware.
+Constructing the knowledge base and training the entity linking models are optional. We provide a knowledge base and pre-trained models in this repo, and you can start with the inference per the steps below. You can also use the existing knowledge base and pre-trained models with your own data.
+
+If you want to construct a knowledge base and train models yourself, note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For detailed setup instructions, please refer to the readmes of the respective repos. The training may take multiple hours or even days, depending on your hardware.
 
 1. To start setting up inferences based on our pre-trained models, first clone this repo to your local directory:
 
