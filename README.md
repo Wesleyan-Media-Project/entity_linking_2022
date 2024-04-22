@@ -17,8 +17,12 @@ To analyze the different dimensions of political ad transparency we have develop
 [5. Thank You!](#5-thank-you)
 
 ## 1. Video Tutorial
+If you are unable to see the video on Firefox with the error: 
+- No video with supported format and MIME type found
 
-<https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e>
+Please try to watch the video via Chrome instead.
+<video src="https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e" alt="If you are unable to see the video on Firefox with the error: No video with supported format and MIME type found, please try it on Chrome.">
+</video>
 
 ## 2. Overview
 
