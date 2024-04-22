@@ -141,15 +141,15 @@ Constructing the knowledge base and training the entity linking models are optio
 
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
   <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2235006">
-    <img class="img-fluid" src="nsf.png" height="100px" alt="National Science Foundation Logo">
+    <img class="img-fluid" src="nsf.png" height="150px" alt="National Science Foundation Logo">
   </a>
 </p>
 
-<p align="center">The Cross-Platform Election Advertising Transparency Initiative (CREATIVE) is a joint infrastructure project of the Wesleyan Media Project and Privacy Tech Lab at Wesleyan University in Connecticut.
+<p align="center">The Cross-Platform Election Advertising Transparency Initiative (CREATIVE) is a joint infrastructure project of the Wesleyan Media Project and privacy-tech-lab at Wesleyan University in Connecticut.
 
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
   <a href="https://www.creativewmp.com/">
-    <img class="img-fluid" src="CREATIVE_logo.png" height="90px" alt="CREATIVE Logo">
+    <img class="img-fluid" src="CREATIVE_logo.png"  width="220px" alt="CREATIVE Logo">
   </a>
 </p>
 
@@ -161,6 +161,6 @@ Constructing the knowledge base and training the entity linking models are optio
 
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
   <a href="https://privacytechlab.org/" style="margin-right: 20px;">
-    <img src="./plt_logo.png" width="200px" height="200px" alt="privacy-tech-lab logo">
+    <img src="./plt_logo.png" width="200px" alt="privacy-tech-lab logo">
   </a>
 </p>
