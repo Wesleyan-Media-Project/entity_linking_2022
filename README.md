@@ -13,7 +13,7 @@ To analyze the different dimensions of political ad transparency we have develop
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
 [3. Data](#3-data)  
-[4. Setup](#4-setup)
+[4. Setup](#4-setup)  
 [5. Thank You!](#5-thank-you)
 
 ## 1. Video Tutorial
