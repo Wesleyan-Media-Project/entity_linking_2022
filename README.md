@@ -18,7 +18,9 @@ To analyze the different dimensions of political ad transparency we have develop
 
 ## 1. Video Tutorial
 
-<https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/f7a8a98d-e779-4b77-827d-2d84f02530be>
+
+https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e
+
 
 ## 2. Overview
 
