@@ -137,6 +137,8 @@ In this example,
 - The `ad_id` field contains the unique identifier for the ad.
 - The `field` field contains the field in the ad where the entity was detected. This could be, for example, the `page_name`, `ad_creative_body`, or `google_asr_text` (texts that we extract from video ads through Google Automatic Speech Recognition).
 
+(INCLUDE [HARRY'S SCRIPTS ON ANALYZING DATA](https://github.com/Wesleyan-Media-Project/entity_linking_2022/issues/5))
+
 ## 5. Thank You
 
 <p align="center"><strong>We would like to thank our financial supporters!</strong></p><br>
