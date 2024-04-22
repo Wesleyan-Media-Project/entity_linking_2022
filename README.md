@@ -18,9 +18,7 @@ To analyze the different dimensions of political ad transparency we have develop
 
 ## 1. Video Tutorial
 
-
-https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e
-
+<https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e>
 
 ## 2. Overview
 
@@ -34,7 +32,7 @@ There are separate folders for running the entity linker on Facebook and Google 
 
    The first task is to construct a knowledge base of political entities (people) of interest.
 
-   The knowledge base of people of interest is constructed in [facebook/knowledge_base/01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/knowledge_base/01_construct_kb.R). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
+   The knowledge base of people of interest is constructed from [facebook/knowledge_base/01_construct_kb.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/knowledge_base/01_construct_kb.R). The input to the file is the data sourced from the 2022 WMP persons file [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv). The script constructs one sentence for each person with a basic description. Districts and party are sourced from the 2022 WMP candidates file [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv), a comprehensive file with names of candidates.
 
    The knowledge base has four columns that include entities' `id`, `name`, `descr` (for description), and `aliases`. Examples of aliases include Joseph R. Biden being referred to as Joe or Robert Francis O’Rourke generally being known as Beto O’Rourke. Here is an example of one row in the knowledge base:
 
@@ -42,13 +40,13 @@ There are separate folders for running the entity linker on Facebook and Google 
    | --------- | --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
    | WMPID1770 | Adam Gray | Adam Gray is a Democratic candidate for the 13rd District of California. | Adam Gray,Gray,Adam Gray's,Gray's,ADAM GRAY,GRAY,ADAM GRAY'S,GRAY'S |
 
-   **Note**: The knowledge base construction is optional for running the scripts in this repo since the knowledge base construction result `entity_kb.csv`is already stored in the `/data` folder. If you want to run the [knowledge base creation script](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base) from this repo, you will also need the scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repos.
+   **Note**: The knowledge base construction is optional for running the scripts in this repo. You can run the inference scripts with our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). If you want to construct your own knowledge base, you would need to run the [knowledge base creation scripts](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base). You would also need the scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repos. See those repos for further instructions.
 
 2. **Train Entity Linking Model**
 
    The second task is to train an entity linking model using the knowledge base. Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/train/02_train_entity_linking.py).
 
-   **Note**: The training of the entity linking models is optional for running the scripts in this repo since the model files are already present. Thus, it is possible to only run the inference scripts.
+   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our existing models (INCLUDE LINK TO EXISTING MODELS). If you want to train your own models, (INCLUDE SOME DESCRIPTION IF ANY.)
 
 3. **Make Inferences with Trained Model**
 
@@ -74,11 +72,9 @@ In this example,
 
 The following setup instructions are for the default terminal on macOS/Linux. For Windows the steps are the same but the commands may be slightly different.
 
-Constructing the knowledge base and training the entity linking models are optional. We provide a knowledge base and pre-trained models in this repo, and you can start with the inference per the steps below. You can also use the existing knowledge base and pre-trained models with your own data.
+**Note**: The following instructions are for the inference scripts only as we provide a knowledge base and pre-trained models that are ready to use for Google and Facebook 2022 data. If you want to apply our inference scripts to a different time period (for example, another election cycle) or in a different context (for example, a non-U.S. election), then you would need to create your own knowledge base and train your own models. In such case, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). Please also note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For model training instructions, please refer to (INCLUDE WHERE TO FIND INSTRUCTION). The training may take multiple hours or even days, depending on your hardware.
 
-If you want to construct a knowledge base and train models yourself, note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For detailed setup instructions, please refer to the readmes of the respective repos. The training may take multiple hours or even days, depending on your hardware.
-
-1. To start setting up inferences based on our pre-trained models, first clone this repo to your local directory:
+1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory:
 
    ```bash
    git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022.git
