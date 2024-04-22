@@ -107,7 +107,7 @@ If you want to construct a knowledge base and train models yourself, note that t
 
    ```bash
    pip install spacy==3.2.4
-   python -m spacy download en_core_web_lg
+   python3 -m spacy download en_core_web_lg
    ```
 
 6. Now, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
