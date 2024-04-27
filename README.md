@@ -77,7 +77,7 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 3. To run the scripts in Python we recommend that you install a Python virtual environment:
 
    ```bash
-   python3 -m venv venv
+   python3.10 -m venv venv
    ```
 
 4. Start your Python virtual environment:
@@ -99,8 +99,13 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    pip install spacy==3.2.4
    python3 -m spacy download en_core_web_lg
    ```
+   Additionally, some scripts in this repository require pandas 2.1.1. To install, run:
 
-6. Now, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
+    ```bash
+   pip install pandas==2.1.1
+   ```
+
+7. Now, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
 
    1. [facebook/inference/01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R)
    2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
@@ -115,6 +120,9 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    &&
    Rscript facebook/inference/03_combine_results.R
    ```
+
+   **Note**: In order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")`
+   to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you're running from. Additionally, make sure that the locations to which you're retrieving input files and/or sending output files are accurate.
 
    After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
 
