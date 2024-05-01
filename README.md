@@ -74,7 +74,7 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
 2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. To install and set up Python you can follow the [Beginner's Guide to Python](https://wiki.python.org/moin/BeginnersGuide). The scripts in this repo were tested on Python 3.10. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/).
 
-3. To run the scripts in Python we recommend that you install a Python virtual environment:
+3. To run the scripts in Python we recommend that you install a Python virtual environment. We create the virtual environment using python v3.10, as it supports the installation of spacy v3.2.4 (which the scripts require):
 
    ```bash
    python3.10 -m venv venv
@@ -115,13 +115,12 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
    ```bash
    Rscript facebook/inference/01_combine_text_asr_ocr.R
-   &&
    python3 facebook/inference/02_entity_linking_inference.py
-   &&
    Rscript facebook/inference/03_combine_results.R
    ```
+   Note that only the python script _must_ be run in the virtual environment that we initially created (that is, the R scripts may be run separately). However, all commands should be able to be executed within the virtual environment if so desired.
 
-   **Note**: In order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")`
+   Additionally in order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")`
    to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you're running from. Additionally, make sure that the locations to which you're retrieving input files and/or sending output files are accurate.
 
    After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
