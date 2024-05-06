@@ -4,7 +4,7 @@ library(tidyr)
 
 # Input files
 # This is an output from data-post-production/01-merge-results/01_merge_preprocessed_results
-path_ads <- "fb_2022_adid_text_clean.csv.gz"
+path_ads <- "fb_2022_adid_text.csv.gz"
 
 # This is the output table from `data-post-production/01-merge-results/01_merge_preprocessed_results`
 path_adid_to_pageid <- "fb_2022_adid_var1.csv.gz"
@@ -40,7 +40,6 @@ aliases <- select(aliases, c(id, aliases))
 # Shape to long format
 # Remove empty rows
 # Keep only distinct rows based on pd_id and value
-
 df <- df %>%
   filter(wmpid != "") %>%
   pivot_longer(-c(ad_id, pd_id, wmpid)) %>%

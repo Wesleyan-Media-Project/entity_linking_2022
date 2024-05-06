@@ -53,8 +53,8 @@ def load_entities():
 name_dict, desc_dict, aliases_dict = load_entities()
 
 # Example content for Biden:
-print(f"{'P80000722'}, name={name_dict['P80000722']}, \
-    desc={desc_dict['P80000722']}, alias={aliases_dict['P80000722']}")
+print(f"{'WMPID1289'}, name={name_dict['WMPID1289']}, \
+    desc={desc_dict['WMPID1289']}, alias={aliases_dict['WMPID1289']}")
 
 #----
 # Create a knowledge base
