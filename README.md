@@ -51,7 +51,21 @@ There are separate folders for running the entity linker depending on whether yo
 
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/train/02_train_entity_linking.py).
 
-   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our existing models (INCLUDE LINK TO EXISTING MODELS). If you want to train your own models, (INCLUDE SOME DESCRIPTION IF ANY.)
+   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our existing models (INCLUDE LINK TO EXISTING MODELS). If you want to train your own models, you can follow the same instructions for the [inference set up](#3-setup) to set up your Python virtural environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
+   1. [facebook/train/01_create_EL_training_data.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/01_create_EL_training_data.R)
+   2. [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py)
+
+   To do so, run the following commands in your terminal:
+
+   ```bash
+   Rscript facebook/train/01_create_EL_training_data.R
+   python3 facebook/train/02_train_entity_linking.py
+   ```
+
+    After successfully running the above scripts in the training folder, you should see the following trained model in the `models` folder:
+
+    - `intermediate_kb`
+    - `trained_entity_linker`
 
 3. **Making Inferences with the Trained Model**
 
@@ -63,7 +77,7 @@ There are separate folders for running the entity linker depending on whether yo
 
 The following setup instructions are for the default terminal on macOS/Linux. For Windows the steps are the same but the commands may be slightly different.
 
-**Note**: The following instructions are for setting up the inference scripts only as we provide a knowledge base and pre-trained models that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For model training instructions, please refer to (INCLUDE WHERE TO FIND INSTRUCTION). The training may take multiple hours or even days, depending on your hardware.
+**Note**: The following instructions are for setting up the inference scripts only as we provide a knowledge base and pre-trained models that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For model training instructions, please refer to [Training the Entity Lining Model](#training-the-entity-linking-model).The training may take multiple hours or even days, depending on your hardware.
 
 1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory:
 
