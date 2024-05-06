@@ -2,7 +2,7 @@
 
 Welcome! This repo contains scripts for identifying and linking election candidates and other political entities in political ads on Google and Facebook. The scripts provided here are intended to help journalists, academic researchers, and others interested in the democratic process to understand which political entities are connected and how.
 
-This repo is a part of the [Cross-platform Election Advertising Transparency Initiative (CREATIVE)](https://www.creativewmp.com/). CREATIVE has the goal of providing the public with analysis tools for more transparency of political ads across online platforms. In particular, CREATIVE provides cross-platform integration and standardization of political ads collected from Google and Facebook. CREATIVE is a joint project of the [Wesleyan Media Project (WMP)](https://mediaproject.wesleyan.edu/) and the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu).
+This repo is a part of the [Cross-platform Election Advertising Transparency Initiative (CREATIVE)](https://www.creativewmp.com/). CREATIVE is an academic research project that has the goal of providing the public with analysis tools for more transparency of political ads across online platforms. In particular, CREATIVE provides cross-platform integration and standardization of political ads collected from Google and Facebook. CREATIVE is a joint project of the [Wesleyan Media Project (WMP)](https://mediaproject.wesleyan.edu/) and the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu).
 
 To analyze the different dimensions of political ad transparency we have developed an analysis pipeline. The scripts in this repo are part of the Data Classification Step in our pipeline.
 
@@ -17,22 +17,21 @@ To analyze the different dimensions of political ad transparency we have develop
 [5. Thank You!](#5-thank-you)
 
 ## 1. Video Tutorial
-If you are unable to see the video on Firefox with the error: 
-- No video with supported format and MIME type found
 
-Please try to watch the video via Chrome instead.
 <video src="https://github.com/Wesleyan-Media-Project/entity_linking_2022/assets/104949958/2a7f456f-d2d9-439f-8e64-f9abb589069e" alt="If you are unable to see the video on Firefox with the error: No video with supported format and MIME type found, please try it on Chrome.">
 </video>
+
+If you are unable to see the video above (e.g., you are getting the error "No video with supported format and MIME type found"), try a different browser. The video works on Google Chrome.
 
 ## 2. Overview
 
 This repo contains an entity linker for 2022 election data. The entity linker is a machine learning classifier and was trained on data that contains descriptions of people and their names, along with their aliases. Data are sourced from the 2022 WMP [person_2022.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/people/person_2022.csv) and [wmpcand_120223_wmpid.csv](https://github.com/Wesleyan-Media-Project/datasets/blob/main/candidates/wmpcand_120223_wmpid.csv) --- two comprehensive files with names of candidates and other people in the political process. Data are restricted to general election candidates and other non-candidate people of interest (sitting senators, cabinet members, international leaders, etc.).
 
-While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which people of interest are mentioned in ads. This entity linker is especially helpful if you have a large amount of ad text data and you do not want to waste time counting how many times a political figure is mentioned within these ads. You can follow the setup instructions below to apply the entity linker to your own data.
+While this repo applies the trained entity linker to the 2022 US elections ads, you can also apply our entity linker to analyze your own political ad text datasets to identify which people of interest are mentioned in ads. The entity linker is especially useful if you have a large amount of ad text data and you do not want to waste time counting how many times a political figure is mentioned within these ads. You can follow the setup instructions below to apply the entity linker to your own data.
 
-There are separate folders for running the entity linker on Facebook and Google data. For both Facebook and Google, the scripts need to be run in the order of the three tasks: (1) constructing a knowledge base of political entities, (2) training the entity linking model, and (3) making inferences with the trained model. The repo provides reusable code for these three tasks. In more detail:
+There are separate folders for running the entity linker depending on whether you want to run it on Facebook or Google data. For both Facebook and Google, the scripts need to be run in the order of three tasks: (1) constructing a knowledge base of political entities, (2) training the entity linking model, and (3) making inferences with the trained model. The repo provides reusable code for these three tasks. For your overview, we describe the three tasks in the following. Note that we provide a knowledge base and pre-trained models that are ready for your use on Google and Facebook 2022 data. For this data you can start right away making inferences and skip steps 1 and 2. However, if you want to apply our inference scripts to a different time period (for example, another election cycle) or in a different context (for example, a non-U.S. election), then you would need to create your own knowledge base and train your own models.
 
-1. **Construct Knowledge Base of Political Entities**
+1. **Constructing a Knowledge Base of Political Entities**
 
    The first task is to construct a knowledge base of political entities (people) of interest.
 
@@ -46,7 +45,7 @@ There are separate folders for running the entity linker on Facebook and Google 
 
    **Note**: The knowledge base construction is optional for running the scripts in this repo. You can run the inference scripts with our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). If you want to construct your own knowledge base, you would need to run the [knowledge base creation scripts](https://github.com/Wesleyan-Media-Project/entity_linking_2022/tree/main/facebook/knowledge_base). You would also need the scripts from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) and [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repos. See those repos for further instructions.
 
-2. **Train Entity Linking Model**
+2. **Training the Entity Linking Model**
 
    The second task is to train an entity linking model using the knowledge base.
 
@@ -54,7 +53,7 @@ There are separate folders for running the entity linker on Facebook and Google 
 
    **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our existing models (INCLUDE LINK TO EXISTING MODELS). If you want to train your own models, (INCLUDE SOME DESCRIPTION IF ANY.)
 
-3. **Make Inferences with Trained Model**
+3. **Making Inferences with the Trained Model**
 
    The third task is to make inferences with the trained model to automatically identify and link entities mentioned in new political ad text.
 
@@ -64,7 +63,7 @@ There are separate folders for running the entity linker on Facebook and Google 
 
 The following setup instructions are for the default terminal on macOS/Linux. For Windows the steps are the same but the commands may be slightly different.
 
-**Note**: The following instructions are for the inference scripts only as we provide a knowledge base and pre-trained models that are ready to use for Google and Facebook 2022 data. If you want to apply our inference scripts to a different time period (for example, another election cycle) or in a different context (for example, a non-U.S. election), then you would need to create your own knowledge base and train your own models. In such case, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). Please also note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For model training instructions, please refer to (INCLUDE WHERE TO FIND INSTRUCTION). The training may take multiple hours or even days, depending on your hardware.
+**Note**: The following instructions are for setting up the inference scripts only as we provide a knowledge base and pre-trained models that are ready for you to use on Google and Facebook 2022 data. To create your own knowledge base and train your own models, you can format your knowledge base according to our [existing knowledge base (for both Google and Facebook)](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/data/entity_kb.csv). In such case, please note that the entity linking model training scripts require datasets from the [datasets](https://github.com/Wesleyan-Media-Project/datasets) repo and tables from the [data-post-production](https://github.com/Wesleyan-Media-Project/data-post-production) repo. These dependencies must be cloned into the same local top-level folder as this repo. For model training instructions, please refer to (INCLUDE WHERE TO FIND INSTRUCTION). The training may take multiple hours or even days, depending on your hardware.
 
 1. To start setting up the inference scripts based on our existing knowledge base and pre-trained models, first clone this repo to your local directory:
 
@@ -74,7 +73,7 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
 2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. To install and set up Python you can follow the [Beginner's Guide to Python](https://wiki.python.org/moin/BeginnersGuide). The scripts in this repo were tested on Python 3.10. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/).
 
-3. To run the scripts in Python we recommend that you install a Python virtual environment. We create the virtual environment using python v3.10, as it supports the installation of spacy v3.2.4 (which the scripts require):
+3. To run the Python scripts we recommend that you install a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4 (which the scripts require):
 
    ```bash
    python3.10 -m venv venv
@@ -99,13 +98,14 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    pip install spacy==3.2.4
    python3 -m spacy download en_core_web_lg
    ```
-   Additionally, some scripts in this repository require pandas 2.1.1. To install, run:
 
-    ```bash
+   Additionally, some scripts in this repository require pandas 2.1.1. To install it, run:
+
+   ```bash
    pip install pandas==2.1.1
    ```
 
-7. Now, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
+6. Now, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
 
    1. [facebook/inference/01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R)
    2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
@@ -118,10 +118,10 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    python3 facebook/inference/02_entity_linking_inference.py
    Rscript facebook/inference/03_combine_results.R
    ```
-   Note that only the python script _must_ be run in the virtual environment that we initially created (that is, the R scripts may be run separately). However, all commands should be able to be executed within the virtual environment if so desired.
 
-   Additionally in order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")`
-   to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you're running from. Additionally, make sure that the locations to which you're retrieving input files and/or sending output files are accurate.
+   Note that only the python script will run in the virtual environment that we initially created. However, all commands can be executed from the virtual environment command prompt.
+
+   Additionally in order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")` to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you are running from. Additionally, make sure that the locations to which you are retrieving input files and/or sending output files are accurate.
 
    After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
 
