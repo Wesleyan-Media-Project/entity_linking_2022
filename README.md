@@ -121,9 +121,9 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
 
 6. In order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")` to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you are running from. Additionally, make sure that the locations to which you are retrieving input files and/or sending output files are accurate.
 
-7. (Jump to 9 if you want to use the pretrained model we provided.) Now, you can create the knowledge base by running the R script in the `facebook/knowledge_base` folder.
+7. (Jump to 9 if you want to use the pretrained model we provided.) Now, you can create the knowledge base by running the R script in the `facebook/knowledge_base` folder (See above for more details).
 
-8. Next, you will train the entity linking model using Spacy library. The scripts are in the `facebook/train` folder. 
+8. Next, you will train the entity linking model using Spacy library. The scripts are in the `facebook/train` folder (See above for more details). 
 
 9. Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
 
