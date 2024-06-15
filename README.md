@@ -51,7 +51,8 @@ There are separate folders for running the entity linker depending on whether yo
 
    Once the knowledge base of people of interest is constructed, the entity linker can be initialized with [spaCy](https://spacy.io/), a natural language processing library we use, in [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/facebook/train/02_train_entity_linking.py).
 
-   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/account/projects/185302/articles/25773600). If you want to train your own models, you can follow the same instructions for the [inference set up](#3-setup) to set up your Python virtural environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
+   **Note**: The training of the entity linking models is optional for running the scripts in this repo. You can run the inference scripts with our pre-trained model by downloading it [here](https://figshare.wesleyan.edu/account/projects/185302/articles/25773600). If you want to train your own models, you can follow the same instructions for the [inference set up](#3-setup) to set up your Python virtual environment and R working directory. After that, run the training scripts in this repo according to their numbering. For example, if you want to run the training pipeline, you can run the scripts in the following order:
+
    1. [facebook/train/01_create_EL_training_data.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/01_create_EL_training_data.R)
    2. [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py)
 
@@ -62,10 +63,10 @@ There are separate folders for running the entity linker depending on whether yo
    python3 facebook/train/02_train_entity_linking.py
    ```
 
-    After successfully running the above scripts in the training folder, you should see the following trained model in the `models` folder:
+   After successfully running the above scripts in the training folder, you should see the following trained model in the `models` folder:
 
-    - `intermediate_kb`
-    - `trained_entity_linker`
+   - `intermediate_kb`
+   - `trained_entity_linker`
 
 3. **Making Inferences with the Trained Model**
 
@@ -85,9 +86,9 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    git clone https://github.com/Wesleyan-Media-Project/entity_linking_2022.git
    ```
 
-2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. To install and set up Python you can follow the [Beginner's Guide to Python](https://wiki.python.org/moin/BeginnersGuide). The scripts in this repo were tested on Python 3.10. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/). We also recommend using R Studio as an interface of R [R Studio website](https://posit.co/download/rstudio-desktop/).
+2. The scripts in this repo are in [Python](https://www.python.org/) and [R](https://www.r-project.org/). Make sure you have both installed and set up before continuing. To install and set up Python you can follow the [Beginner's Guide to Python](https://wiki.python.org/moin/BeginnersGuide). The scripts in this repo were tested on Python 3.10. To install and set up R you can follow the [CRAN website](https://cran.r-project.org/). We also recommend using R Studio as an interface of R. Here is the [R Studio website](https://posit.co/download/rstudio-desktop/).
 
-3. To run the Python scripts we recommend that you create a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4 (which the scripts require):
+3. To run the Python scripts we recommend that you create a Python virtual environment. Create the virtual environment using python v3.10, as it supports the installation of spaCy v3.2.4, which some scripts in this repo require:
 
    ```bash
    python3.10 -m venv venv
@@ -105,7 +106,7 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    deactivate
    ```
 
-5. Some scripts in this repo need [spaCy](https://spacy.io/) v3.2.4, particularly, spaCy's `en_core_web_lg`. To install
+5. Some scripts in this repo require [spaCy](https://spacy.io/) v3.2.4, particularly, spaCy's `en_core_web_lg`. To install
    `en_core_web_lg`, run:
 
    ```bash
@@ -113,42 +114,42 @@ The following setup instructions are for the default terminal on macOS/Linux. Fo
    python3 -m spacy download en_core_web_lg
    ```
 
-   Additionally, some scripts in this repository require pandas 2.1.1. To install it, run:
+6. Additionally, some scripts in this repository require pandas 2.1.1. To install it, run:
 
    ```bash
    pip install pandas==2.1.1
    ```
 
-6. In order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")` to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you are running from. Additionally, make sure that the locations to which you are retrieving input files and/or sending output files are accurate.
+7. In order to successfully run each R script, you must first set your working directory. You can achieve this by adding the line `setwd("your/working/directory")` to the top of the R scripts, replacing `"your/working/directory"` with whatever directory you are running from. Additionally, make sure that the locations to which you are retrieving input files and/or sending output files are accurate.
 
-7. (Jump to 9 if you want to use the pretrained model we provided.) Now, you can create the knowledge base by running the R script in the `facebook/knowledge_base` folder (See above for more details).
+8. (Jump to step 10 if you want to use the pre-trained model we provided.) Now, you can create the knowledge base by running the R script in the `facebook/knowledge_base` folder (See above for more details).
 
-8. Next, you will train the entity linking model using Spacy library. The scripts are in the `facebook/train` folder (See above for more details). 
+9. Next, you will train the entity linking model using spaCy library. The scripts are in the `facebook/train` folder (See above for more details).
 
-9. Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
+10. Finally, run the inferences scripts in this repo according to their numbering. For example, if you want to run the inference pipeline, you can run the scripts in the following order:
 
-   1. [facebook/inference/01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R)
-   2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
-   3. [facebook/inference/03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)
+    1. [facebook/inference/01_combine_text_asr_ocr.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/01_combine_text_asr_ocr.R)
+    2. [facebook/inference/02_entity_linking_inference.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/02_entity_linking_inference.py)
+    3. [facebook/inference/03_combine_results.R](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/inference/03_combine_results.R)
 
-   To do so, run the following commands in your terminal:
+To do so, run the following commands in your terminal:
 
-   ```bash
-   Rscript facebook/inference/01_combine_text_asr_ocr.R
-   python3 facebook/inference/02_entity_linking_inference.py
-   Rscript facebook/inference/03_combine_results.R
-   ```
-   
-   Note that only the Python script will run in the virtual environment that we initially created. However, all commands can be executed from the virtual environment command prompt.
+```bash
+Rscript facebook/inference/01_combine_text_asr_ocr.R
+python3 facebook/inference/02_entity_linking_inference.py
+Rscript facebook/inference/03_combine_results.R
+```
 
-   After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
+Note that only the Python script will run in the virtual environment that we initially created. However, all commands can be executed from the virtual environment command prompt.
 
-   - `entity_linking_results_fb22.csv.gz`
-   - `entity_linking_results_fb22_notext.csv.gz`
-   - `detected_entities_fb22.csv.gz`
-   - `detected_entities_fb22_for_ad_tone.csv.gz`
+After successfully running the above scripts in the inference folder, you should see the following entity linking results in the `data` folder:
 
-   **Note**: The scripts in this repo are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives. Usually, they are the same scripts on different data or with minor variations. For example, [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py) and [facebook/train/02_untrained_model.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_untrained_model.py) are both scripts for training an entity linking model, but they differ slightly as to their training datasets.
+- `entity_linking_results_fb22.csv.gz`
+- `entity_linking_results_fb22_notext.csv.gz`
+- `detected_entities_fb22.csv.gz`
+- `detected_entities_fb22_for_ad_tone.csv.gz`
+
+**Note**: The scripts in this repo are numbered in the order in which they should be run. Scripts that directly depend on one another are ordered sequentially. Scripts with the same number are alternatives. Usually, they are the same scripts on different data or with minor variations. For example, [facebook/train/02_train_entity_linking.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_train_entity_linking.py) and [facebook/train/02_untrained_model.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/main/facebook/train/02_untrained_model.py) are both scripts for training an entity linking model, but they differ slightly as to their training datasets.
 
 ## 4. Results Storage
 
@@ -170,7 +171,7 @@ In this example,
 
 ## 5. Thank You
 
-<p align="center"><strong>We would like to thank our financial supporters!</strong></p><br>
+<p align="center"><strong>We would like to thank our supporters!</strong></p><br>
 
 <p align="center">This material is based upon work supported by the National Science Foundation under Grant Numbers 2235006, 2235007, and 2235008.</p>
 
