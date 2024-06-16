@@ -167,7 +167,68 @@ In this example,
 - The `ad_id` field contains the unique identifier for the ad.
 - The `field` field contains the field in the ad where the entity was detected. This could be, for example, the `page_name`, `ad_creative_body`, or `google_asr_text` (texts that we extract from video ads through Google Automatic Speech Recognition).
 
-(INCLUDE [HARRY'S SCRIPTS ON ANALYZING DATA](https://github.com/Wesleyan-Media-Project/entity_linking_2022/issues/5))
+However, the csv.gz files produced in this repo are usually large and may contain millions of rows. To make it easier to read and analyze the data, we have provided two scripts [readcsvgz.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvgz.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvGUI.py) in the root folder.
+
+### Script `readcsvgz.py`
+
+The script `readcsvgz.py` is a Python script that reads, filters the `csv.gz` files and saves the filtered data to an Excel file. It has the following features:
+
+- Load a specified number of rows from a CSV file.
+- Skip a specified number of initial rows.
+- Filter rows based on the presence of a specified text (case-insensitive).
+
+#### Usage
+
+To run the script, you need to first install the required packages:
+
+```bash
+pip install pandas
+```
+
+After installing the required packages, you can run the script with the command line arguments.
+
+For example, to run the script with the default arguments (start from row 0, read 1000 rows, no text filter), you can enter the following command in your terminal:
+
+```bash
+python readcsvgz.py --file facebook/data/entity_linking_results_fb22.csv.gz
+```
+
+You can customize the behavior of the script by providing additional command-line arguments:
+
+- `--file`: Path to the csv.gz file (required).
+- `--skiprows`: Number of rows to skip at the start of the file (default: 0).
+- `--nrows`: Number of rows to read from the file (default: 1000).
+- `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: no filter).
+
+For example, to filter rows containing the text "Biden", starting from row 0 and reading 100000 rows:
+
+```bash
+python readcsvgz.py --file facebook/data/entity_linking_results_fb22.csv.gz --nrows 100000 --filter_text Biden
+```
+
+#### Help
+
+To see a help message with the description of all available arguments, you can run the following command:
+
+```bash
+python readcsvgz.py --h
+```
+
+### Script `readcsvGUI.py`
+
+In addtion to the `readcsvgz.py` script, we also provide a GUI version of the script that display the data in a graphical user interface via [pandasGui](https://pypi.org/project/pandasgui/).
+
+To run the `readcsvGUI.py` script, you need to first install the required packages:
+
+```bash
+pip install pandas pandasgui
+```
+
+After installing the required packages, you can run the script with the following command:
+
+```bash
+python readcsvGUI.py
+```
 
 ## 5. Thank You
 
