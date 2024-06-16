@@ -13,8 +13,9 @@ To analyze the different dimensions of political ad transparency we have develop
 [1. Video Tutorial](#1-video-tutorial)  
 [2. Overview](#2-overview)  
 [3. Setup](#3-setup)  
-[4. Results Storage](#4-results-storage)  
-[5. Thank You!](#5-thank-you)
+[4. Results Storage](#4-results-storage)
+[5. Results Analysis](#5-results-analysis)  
+[6. Thank You](#6-thank-you)
 
 ## 1. Video Tutorial
 
@@ -167,7 +168,9 @@ In this example,
 - The `ad_id` field contains the unique identifier for the ad.
 - The `field` field contains the field in the ad where the entity was detected. This could be, for example, the `page_name`, `ad_creative_body`, or `google_asr_text` (texts that we extract from video ads through Google Automatic Speech Recognition).
 
-However, the csv.gz files produced in this repo are usually large and may contain millions of rows. To make it easier to read and analyze the data, we have provided two scripts [readcsvgz.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvgz.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvGUI.py) in the root folder.
+## 5. Results Analysis
+
+The `csv.gz` files produced in this repo are usually large and may contain millions of rows. To make it easier to read and analyze the data, we have provided two scripts [readcsvgz.py](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvgz.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/entity_linking_2022/blob/issue-2/readcsvGUI.py) in the root folder.
 
 ### Script `readcsvgz.py`
 
@@ -230,7 +233,11 @@ After installing the required packages, you can run the script with the followin
 python readcsvGUI.py
 ```
 
-## 5. Thank You
+Here is an example of the GUI interface:
+![A picture of the pandasgui interface](PandasGUI_example.png)
+For more information on how to use the GUI interface, please refer to the [pandasgui documentation](https://pypi.org/project/pandasgui/).
+
+## 6. Thank You
 
 <p align="center"><strong>We would like to thank our supporters!</strong></p><br>
 
