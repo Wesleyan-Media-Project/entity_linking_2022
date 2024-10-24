@@ -32,7 +32,7 @@ path_entities_kb <- "facebook/data/entity_kb.csv"
 
 # This file is located in our datasets repository (https://github.com/Wesleyan-Media-Project/datasets)
 # Make sure the datasets folder is located in the same directory as entity_linking_2022
-path_wmpent_file <- "../datasets/wmp_entity_files/Facebook/2022/wmp_fb_2022_entities_v120122.csv" # nolint: line_length_linter.
+path_wmpent_file <- "../datasets/wmp_entity_files/Facebook/wmp_fb_2022_entities_v082324.csv" # nolint: line_length_linter.
 # Output files
 path_output <- "facebook/data/ads_with_aliases.csv.gz"
 
