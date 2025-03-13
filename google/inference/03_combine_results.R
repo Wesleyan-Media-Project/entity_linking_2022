@@ -53,7 +53,8 @@ el_at_pfb2_nocand <- el_at_pfb2 %>%
 el_at_pfb2_cand <- el_at_pfb2 %>%
   filter(wmp_spontype == "campaign") %>%
   mutate(text = tolower(text),
-         end_pfb = str_locate(text, "paid for by")[,2] - 1)
+         end_pfb = str_locate(text, "paid for by")[,2] - 1,
+         start_pfb = str_locate(text, "approve this message")[,1] - 1)
 
 el_at_pfb2_cand2 <- el_at_pfb2_cand %>%
   mutate(
@@ -69,10 +70,15 @@ el_at_pfb2_cand2 <- el_at_pfb2_cand %>%
 
 # MERGE LATER el_at_pfb2_cand_match_nodrop AND el_at_pfb2_cand_nomatch
 el_at_pfb2_cand_nomatch <- el_at_pfb2_cand2 %>%
-  filter(end_pfb != text_start - 2 | is.na(end_pfb))
+  filter(((end_pfb < text_start - 6 | end_pfb > text_start - 1 | is.na(end_pfb)) & 
+            (start_pfb < text_end + 5 | start_pfb > text_end + 10 | is.na(start_pfb))))
 
 el_at_pfb2_cand_match <- el_at_pfb2_cand2 %>%
-  filter(end_pfb == text_start - 2)
+  filter(((end_pfb >= text_start - 6 & end_pfb <= text_start - 1) | 
+            (start_pfb >= text_end + 5  & start_pfb <= text_end + 10)))
+
+# Ensure no rows are lost (Should return True)
+nrow(el_at_pfb2_cand_match) + nrow(el_at_pfb2_cand_nomatch) == nrow(el_at_pfb2_cand2)
 
 
 # DO NOT MERGE LATER, el_at_pfb2_cand_match_drop WILL BE DROPPED
@@ -83,7 +89,7 @@ el_at_pfb2_cand_match_drop <- el_at_pfb2_cand_match %>%
   filter(wmpid == detected_entities)
 
 
-# There are 15 cases where this is the case so we drop those detections
+# There are 378 cases where this is the case so we drop those detections
 # Put everything back together
 el_at_pfb2_cand3 <- bind_rows(el_at_pfb2_cand_match_nodrop, el_at_pfb2_cand_nomatch)
 
